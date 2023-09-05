@@ -8,20 +8,6 @@ set -eu
 # read in all env vars
 export PYTHONPATH=pydomkeys/
 
-run() {
-    env | fgrep LOGGING_
-    echo "running the application in the background..."
-    poetry run uvicorn pydomkeys.main:app --reload --host=$LOCAL_IP --port 15010
-}
-
-start() {
-    echo "not ready yet--need to evaluate the env and choose staging or prod and configure rolling logs"
-    exit 1
-
-    poetry run uvicorn pydomkeys.main:app --host=$LOCAL_IP --port 15010 &
-    echo "pid=$!"
-}
-
 tests() {
     echo "running tests"
     poetry run pytest --cov=pydomkeys/ --cov-branch
@@ -74,8 +60,7 @@ pre_commit() {
     clear
     format
 
-    echo "running unit and integration tests..."
-    tests && integration_test 
+    tests
 
     echo "running lint and ruff..."
     ruff
@@ -92,12 +77,9 @@ show_help() {
     echo "USE: mk [sub-command]"
     echo "  redis: run the redis tests in test model"
     echo "  test: run the test suite"
-    echo "  inttest: run the integration test suite (server must be running)"
     echo "  cover: run the test coverage"
     echo "  lint: lint the all files"
     echo "  ruff: lint all files with ruff"
-    echo "  run: run the application"
-    echo "  start: start the application in the background; log it logs/logfile"
     echo "  watch: watch all files and run the tests on change"
     echo "  format: run black and isort on the project"
     echo "  precommit: run formmating, lint, tests integration prior to git commit"
@@ -112,16 +94,12 @@ else
     key="$1"
 
     case $key in
-        -h|--help)
+        -h|--help|help)
             show_help
             ;;
 
         test|te*)
             tests
-            ;;
-
-        int*)
-            integration_test
             ;;
 
         cov*)
@@ -171,6 +149,7 @@ else
 
 
         *)
+            echo "What?"
             show_help
             ;;
     esac
