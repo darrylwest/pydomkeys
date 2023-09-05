@@ -34,7 +34,10 @@ todos:
 mypy:
     poetry run mypy pydomkeys/
 
+refurb:
+    refurb pydomkeys/ tests/
+
 precommit:
     clear
-    just test cover format ruff mypy
+    just test cover format ruff refurb mypy
 
