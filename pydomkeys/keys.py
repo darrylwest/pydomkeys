@@ -27,7 +27,7 @@ Date: 2023-08-26
 
 import string
 import time
-from typing import Callable, Optional
+from typing import Optional
 
 from numpy import random
 
@@ -72,9 +72,17 @@ class Counter:
 class DomainRouter:
     """Domain Router class used to generate domain and route prefix for rtkey."""
 
-    def __init__(self, domain: str, router: Optional[Callable] = None):
+    def __init__(self, domain: str):
         """Initialise DomainRouter with a two character domain label and optional route-generator."""
-        ...
+        self.domain_key = domain
+
+    def domain(self) -> str:
+        """Return the domain key, usually two characters."""
+        return self.domain_key
+
+    def route(self) -> str:
+        """Return the random routing/shard key, usually two characters 00 through ff for one of 256 routes."""
+        return f"{dflt_rng.integers(0, 256):02x}"
 
 
 class KeyGen:

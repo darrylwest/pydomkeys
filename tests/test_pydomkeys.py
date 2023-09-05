@@ -66,8 +66,13 @@ def test_counter():
 
 
 def test_domain_router():
-    router = DomainRouter(domain="US")
-    assert isinstance(router, DomainRouter)
+    dom = "US"
+    domr = DomainRouter(domain=dom)
+    assert isinstance(domr, DomainRouter)
+
+    assert domr.domain() == dom
+    route = domr.route()
+    assert len(route) == 2
 
 
 def test_base62():

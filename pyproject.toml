@@ -6,6 +6,12 @@ authors = ["darryl west <dpw@raincitysoftware.com>"]
 readme = "README.md"
 license = "MIT"
 packages = [{include = "pydomkeys"}]
+keywords = ["no-sql", "redis", "short-keys", "database", "key-value", "key-value-store"]
+classifiers = [
+    "Topic :: Database",
+    "Topic :: Software Development :: Libraries",
+    "Development Status :: 3 - Alpha",
+]
 
 [tool.poetry.dependencies]
 python = "^3.11"
@@ -16,9 +22,7 @@ pytest = "^7.4.0"
 black = "^23.7.0"
 pytest-cov = "^4.1.0"
 pytest-mock = "^3.11.1"
-httpx = "^0.24.1"
 faker = "^19.3.0"
-pytest-asyncio = "^0.21.1"
 pylint = "^2.17.5"
 mypy = "^1.5.1"
 perf8 = "^0.0.1"
