@@ -6,7 +6,7 @@ import sys
 from rich.console import Console
 from datetime import datetime
 
-from pydomkeys.keys import KeyGen, Counter
+from pydomkeys.keys import KeyGen, Counter, DomainRouter
 from pydomkeys.base62 import Base62
 
 console = Console()
@@ -63,6 +63,11 @@ def test_counter():
     counter.next_count()
     n = counter.reset()
     assert n == n_min
+
+
+def test_domain_router():
+    router = DomainRouter(domain="US")
+    assert isinstance(router, DomainRouter)
 
 
 def test_base62():

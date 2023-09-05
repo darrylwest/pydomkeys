@@ -12,7 +12,7 @@ _A python library for domain entity key generation identifiers e.g., user, provi
 
 ### Overview
 
-#### Routing Key Features...
+#### Domain Routing Key Features...
 
 * fast, uniformly distributed random number generation based on large range (10^40?) of values
 * time based to the microsecond
@@ -38,20 +38,36 @@ If you need to generate a key that is truely globally unique, then use v4 UUID. 
 
 ### Installation
 
+NOTE: _this package is still in development and not available yet_
+
 `pip install pydomkeys`
 
 ### Use
 
-pass...
+Examples for time based generator `txkey()`...
 
-### Binaries
+```python
+    >>> from pydomkeys.keys import KeyGen
+    >>> keygen = KeyGen()
+    >>> keygen.txkey()
+    '7l0QKqIlDTME'
+    >>> key = keygen.txkey()
+    >>> assert len(key) == 12
+    >>> key2 = keygen.txkey()
+    >>> assert key2 > key
+```
 
-If you want to use the rust version...
+Examples for routing key generator `rtkey()`...
 
-
-* `rtkey` : crates a single routing key
-* `txkey` : creates a single timestamp key
-* `show-route --routes n key`: shows the route number (0..n) for the given key
+```python
+    >>> from pydomkeys.keys import KeyGen, DomainRouter
+    >>> router = DomainRouter("us")
+    >>> keygen = KeyGen(router=router)
+    >>> keygen.rtkey()
+    'usH67l0fKBYkbOc1'
+    >>> key = keygen.txkey()
+    >>> assert len(key) == 16
+```
 
 ### References
 

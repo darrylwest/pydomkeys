@@ -2,16 +2,19 @@
 
 This module supports functions that create time-based, base62 domain keys.  The keys
 are based on the current time in millisecons and a 3 digit counter that increments
-with each new key.
+with each new key.  The keys are sortable based on creation date and counter.
 
 Examples:
 --------
+    >>> from pydomkeys.base62 import Base62
     >>> from pydomkeys.keys import KeyGen
     >>> keygen = KeyGen()
     >>> keygen.txkey()
     '7l0QKqIlDTME'
-    >>> keygen.txkey()
-    '7l0QL2fQGTMF'
+    >>> key = keygen.txkey()
+    >>> assert len(key) == 12
+    >>> key2 = keygen.txkey()
+    >>> assert key2 > key
     
 
 The module contains the following functions:
@@ -24,7 +27,7 @@ Date: 2023-08-26
 
 import string
 import time
-from typing import Optional
+from typing import Callable, Optional
 
 from numpy import random
 
@@ -64,6 +67,14 @@ class Counter:
         """Reset the counter to minimum and return the value."""
         self.count = self.min
         return self.count
+
+
+class DomainRouter:
+    """Domain Router class used to generate domain and route prefix for rtkey."""
+
+    def __init__(self, domain: str, router: Optional[Callable] = None):
+        """Initialise DomainRouter with a two character domain label and optional route-generator."""
+        ...
 
 
 class KeyGen:
