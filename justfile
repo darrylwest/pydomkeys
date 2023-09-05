@@ -3,19 +3,18 @@ project := "pydomkeys"
 
 export PYTHONPATH := "pydomkeys/"
 
-alias t := test
 alias cov := cover
 alias form := format
 alias pre := precommit
 
-# run the standard tests
+# run the standard tests (default target)
 test:
     poetry run pytest --cov=pydomkeys/ --cov-branch
 
 # run the standard tests + clippy and fmt
 cover:
     poetry run coverage report -m
-    coverage html --title="Logging Service Test Coverage"
+    coverage html --title="PyDomKeys Test Coverage"
 
 format:
     black pydomkeys/ tests/
@@ -35,11 +34,7 @@ todos:
 mypy:
     poetry run mypy pydomkeys/
 
-
 precommit:
-    just test
-    just cover
-    just format
-    just ruff
-    just mypy
+    clear
+    just test cover format ruff mypy
 

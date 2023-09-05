@@ -27,7 +27,7 @@ Date: 2023-08-26
 
 import string
 import time
-from typing import Optional
+from typing import Optional, Self
 
 from numpy import random
 
@@ -102,6 +102,11 @@ class KeyGen:
         self.base62 = base62
         self.counter = counter
 
+    @classmethod
+    def create(cls, domain: str) -> Self:
+        """Create a standard KeyGen instance with the given domain string."""
+        return cls(DomainRouter(domain))
+
     def txkey(self, milliseconds: Optional[int] = None):
         """Generate a new 12 character txkey with the current counter."""
         milliseconds = time.time_ns() // 1_000 if milliseconds is None else milliseconds
@@ -122,6 +127,6 @@ class KeyGen:
 
         key = self.txkey(milliseconds)
         prefix = self.domain_router.domain()
-        suffix = self.domain_router.route()
+        route = self.domain_router.route()
 
-        return f"{prefix}{key}{suffix}"
+        return f"{prefix}{route}{key}"

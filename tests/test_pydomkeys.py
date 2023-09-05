@@ -112,7 +112,17 @@ def test_rtkey():
     key = keygen.rtkey()
     assert len(key) == 16
     assert key.startswith("tt")
-    # test that the next two chars are 00..ff
+    route = key[2:4]
+    assert int(route, 16) < 256
+
+
+def test_factory_constructor():
+    keygen = KeyGen.create("ZZ")
+    key = keygen.rtkey()
+    assert len(key) == 16
+    assert key.startswith("ZZ")
+    route = key[2:4]
+    assert int(route, 16) < 256
 
 
 if __name__ == "__main__":
