@@ -69,12 +69,23 @@ Examples for routing key generator `rtkey()`...
     >>> assert len(key) == 16
 ```
 
+Or, use the factory method `create` to get a new instance...
+
+```python
+    >>> from pydomkeys.keys import KeyGen
+    >>> keygen = KeyGen.create("US")
+    >>> keygen.rtkey()
+    'USH67l0fKBYkbOc1'
+    >>> key = keygen.txkey()
+    >>> route_number = int(key[2:4], 16)
+    >>> assert route_number < 256
+```
+
 ### References
 
 * [Base62 Defined](https://en.wikipedia.org/wiki/Base62)
 * [UUID RFC4122](https://datatracker.ietf.org/doc/html/rfc4122.html)
 * [PCG Fast Algos for Random Number Generation](https://www.pcg-random.org/pdf/hmc-cs-2014-0905.pdf)
-* [Redis serialization protocol spec](https://redis.io/docs/reference/protocol-spec/)
 * [Using Numpy Random Generator](https://realpython.com/numpy-random-number-generator/)
 * [NumPy Random](https://numpy.org/doc/stable/reference/random/index.html)
 
