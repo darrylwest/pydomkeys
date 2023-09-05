@@ -95,6 +95,11 @@ class KeyGen:
         return f"{key}{suffix}"
 
     # TODO(dpw): implement this
-    def rtkey(self, _milliseconds: int = time.time_ns() // 1_000):
+    def rtkey(self, milliseconds: Optional[int] = None):
         """Return a routing key, always 16 characters base62 encoded."""
-        return ""
+        milliseconds = time.time_ns() // 1_000 if milliseconds is None else milliseconds
+
+        key = self.txkey(milliseconds)
+        prefix = "1000" # TODO: generate the random routing
+
+        return f"{prefix}{key}"

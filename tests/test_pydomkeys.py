@@ -98,7 +98,7 @@ def test_rtkey():
     """Test the rtkey."""
     keygen = KeyGen()
     key = keygen.rtkey()
-    assert key == ""
+    assert len(key) == 16
 
 
 if __name__ == "__main__":
