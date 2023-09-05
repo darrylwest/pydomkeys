@@ -18,6 +18,10 @@ class Base62:
         """Initialize the alphabet or use the default."""
         self.alphabet = alphabet
 
+    def __repr__(self):
+        """Return the current base62 alphabet."""
+        return f"base62 alphabet: {self.alphabet}"
+
     def encode(self, number: int) -> str:
         """Encode the integer number to base62 using the specified alphabet defined at init time."""
         radix = len(self.alphabet)

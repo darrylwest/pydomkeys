@@ -37,6 +37,7 @@ def test_counter():
     """Test the counter."""
     console.rule("Default counter for large and small numbers")
     counter = Counter()
+    console.log(counter)
     n = counter.next_count()
     console.log(f"initial count: {n}")
 
@@ -69,6 +70,7 @@ def test_counter():
 def test_domain_router():
     dom = "US"
     domr = DomainRouter(domain=dom)
+    console.log(domr)
     assert isinstance(domr, DomainRouter)
 
     assert domr.domain() == dom
@@ -81,6 +83,7 @@ def test_base62():
     console.rule("Default Base62 for min/max dates for 9 characters")
 
     base62 = Base62()
+    console.log(base62)
 
     # don't forget to set the timezone to zulu/utc
     dt = datetime.fromisoformat("2000-01-01T00:00:00Z")
@@ -118,6 +121,7 @@ def test_rtkey():
 
 def test_factory_constructor():
     keygen = KeyGen.create("ZZ")
+    console.log(keygen)
     key = keygen.rtkey()
     assert len(key) == 16
     assert key.startswith("ZZ")

@@ -53,6 +53,10 @@ class Counter:
 
         self.count = start
 
+    def __repr__(self):
+        """Show the current count, min and max."""
+        return f"count: {self.count}, min: {self.min}, max: {self.max}"
+
     def next_count(self) -> int:
         """Increment the count and return the int; roll-over to x_min when reaching x_max."""
         count = self.count + 1
@@ -75,6 +79,10 @@ class DomainRouter:
     def __init__(self, domain: str):
         """Initialise DomainRouter with a two character domain label and optional route-generator."""
         self.domain_key = domain
+
+    def __repr__(self):
+        """Show the domain key."""
+        return f"domain key: {self.domain_key}"
 
     def domain(self) -> str:
         """Return the domain key, usually two characters."""
@@ -101,6 +109,10 @@ class KeyGen:
 
         self.base62 = base62
         self.counter = counter
+
+    def __repr__(self):
+        """Show the domain router, base62 and counter objects."""
+        return f"router: {self.domain_router}, base62: {self.base62}, counter: {self.counter}"
 
     @classmethod
     def create(cls, domain: str) -> Self:
