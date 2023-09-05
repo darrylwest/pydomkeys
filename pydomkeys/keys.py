@@ -1,5 +1,23 @@
 """A library for domain entity key generation identifiers.
 
+This module supports functions that create time-based, base62 domain keys.  The keys
+are based on the current time in millisecons and a 3 digit counter that increments
+with each new key.
+
+Examples:
+--------
+    >>> from pydomkeys.keys import KeyGen
+    >>> keygen = KeyGen()
+    >>> keygen.txkey()
+    '7l0QKqIlDTME'
+    >>> keygen.txkey()
+    '7l0QL2fQGTMF'
+    
+
+The module contains the following functions:
+- `txkey()` - Returns a 12 character base62 txkey
+- `rtkey()` - Returns a 16 character base62 txkey
+
 Author: darryl.west
 Date: 2023-08-26
 """
