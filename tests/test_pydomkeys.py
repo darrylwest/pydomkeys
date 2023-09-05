@@ -15,7 +15,8 @@ console = Console()
 def test_txkey():
     """Test the txkey."""
     console.rule("Default KeyGen.txkey")
-    keygen = KeyGen()
+    router = DomainRouter("tt")
+    keygen = KeyGen(domain_router=router)
 
     lastkey = None
     for n in range(20):
@@ -106,9 +107,12 @@ def test_base62():
 
 def test_rtkey():
     """Test the rtkey."""
-    keygen = KeyGen()
+    router = DomainRouter("tt")
+    keygen = KeyGen(domain_router=router)
     key = keygen.rtkey()
     assert len(key) == 16
+    assert key.startswith("tt")
+    # test that the next two chars are 00..ff
 
 
 if __name__ == "__main__":

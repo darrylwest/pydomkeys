@@ -90,10 +90,12 @@ class KeyGen:
 
     def __init__(
         self,
+        domain_router: DomainRouter,
         base62: Optional[Base62] = None,
         counter: Optional[Counter] = None,
     ):
         """Initialize the base62 worker and counter."""
+        self.domain_router = domain_router
         base62 = Base62() if base62 is None else base62
         counter = Counter() if counter is None else counter
 
@@ -119,7 +121,7 @@ class KeyGen:
         milliseconds = time.time_ns() // 1_000 if milliseconds is None else milliseconds
 
         key = self.txkey(milliseconds)
-        prefix = "10"  # TODO(dpw): generate the random routing
-        suffix = "XX"
+        prefix = self.domain_router.domain()
+        suffix = self.domain_router.route()
 
         return f"{prefix}{key}{suffix}"
