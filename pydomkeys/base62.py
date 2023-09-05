@@ -6,11 +6,7 @@ Date: 2023-08-26
 
 import string
 
-from numpy import random
-
 DEFAULT_ALPHABET = string.digits + string.ascii_uppercase + string.ascii_lowercase
-
-dflt_rng = random.default_rng()
 
 
 class Base62:

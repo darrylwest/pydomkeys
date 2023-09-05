@@ -100,6 +100,7 @@ class KeyGen:
         milliseconds = time.time_ns() // 1_000 if milliseconds is None else milliseconds
 
         key = self.txkey(milliseconds)
-        prefix = "1000" # TODO: generate the random routing
+        prefix = "10"  # TODO(dpw): generate the random routing
+        suffix = "XX"
 
-        return f"{prefix}{key}"
+        return f"{prefix}{key}{suffix}"
