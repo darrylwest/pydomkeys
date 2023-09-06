@@ -19,7 +19,7 @@ Examples:
 
 The module contains the following functions:
 - `txkey()` - Returns a 12 character base62 txkey
-- `rtkey()` - Returns a 16 character base62 txkey
+- `route_key()` - Returns a 16 character base62 txkey
 
 Author: darryl.west
 Date: 2023-08-26
@@ -74,7 +74,7 @@ class Counter:
 
 
 class DomainRouter:
-    """Domain Router class used to generate domain and route prefix for rtkey."""
+    """Domain Router class used to generate domain and route prefix for route_key."""
 
     def __init__(self, domain: str):
         """Initialise DomainRouter with a two character domain label and optional route-generator."""
@@ -94,7 +94,7 @@ class DomainRouter:
 
 
 class KeyGen:
-    """KeyGen class used to generate txkey and rtkey."""
+    """KeyGen class used to generate txkey and route_key."""
 
     def __init__(
         self,
@@ -133,9 +133,8 @@ class KeyGen:
             3850
             >>> keygen.counter.max
             238000
-            >>> key = keygen.rtkey()
-            >>> assert len(key) == 16
-
+            >>> key = keygen.route_key()
+            >>> assert len(key)
 
         """
         return cls(DomainRouter(domain))
@@ -154,7 +153,7 @@ class KeyGen:
         return f"{key}{suffix}"
 
     # TODO(dpw): implement this
-    def rtkey(self, milliseconds: Optional[int] = None):
+    def route_key(self, milliseconds: Optional[int] = None):
         """Return a routing key, always 16 characters base62 encoded."""
         milliseconds = time.time_ns() // 1_000 if milliseconds is None else milliseconds
 

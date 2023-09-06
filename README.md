@@ -79,13 +79,13 @@ Examples for time based generator `txkey()`...
     >>> assert key2 > key
 ```
 
-Examples for routing key generator `rtkey()`...
+Examples for routing key generator `route_key()`...
 
 ```python
     >>> from pydomkeys.keys import KeyGen, DomainRouter
     >>> router = DomainRouter("us")
     >>> keygen = KeyGen(router=router)
-    >>> keygen.rtkey()
+    >>> keygen.route_key()
     'usH67l0fKBYkbOc1'
     >>> key = keygen.txkey()
     >>> assert len(key) == 16
@@ -96,7 +96,7 @@ Or, use the factory method `create` to get a new instance...
 ```python
     >>> from pydomkeys.keys import KeyGen
     >>> keygen = KeyGen.create("US")
-    >>> keygen.rtkey()
+    >>> keygen.route_key()
     'USH67l0fKBYkbOc1'
     >>> key = keygen.txkey()
     >>> route_number = int(key[2:4], 16)
@@ -106,6 +106,13 @@ Or, use the factory method `create` to get a new instance...
 ### Contributing
 
 Interested in contributing to this project?  If so, check our our [contributing guidelines](./CONTRIBUTING.md) document as well as our [code of conduct](./CODE_OF_CONDUCT.md).
+
+### Changelog
+
+We are currently in alpha, so lots of changes are possible.  But the project is small, so it won't be long until we go to beta.  
+We will do a minor version bump when we come out of alpha.
+
+We won't have a specific changelog until we are in beta.
 
 ### References
 
@@ -122,4 +129,4 @@ Except where noted (below and/or in individual files), all code in this reposito
 * MIT License ([LICENSE-MIT](LICENSE-MIT) or [http://opensource.org/licenses/MIT](http://opensource.org/licenses/MIT))
 * Apache License, Version 2.0 ([LICENSE-APACHE](LICENSE-APACHE) or [http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0))
 
-###### darryl.west | 2023.09.05
+###### PyDomKeys | 2023.09.06

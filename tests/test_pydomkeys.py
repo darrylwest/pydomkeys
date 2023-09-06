@@ -108,11 +108,11 @@ def test_base62():
     assert n == 0
 
 
-def test_rtkey():
-    """Test the rtkey."""
+def test_route_key():
+    """Test the route_key."""
     router = DomainRouter("tt")
     keygen = KeyGen(domain_router=router)
-    key = keygen.rtkey()
+    key = keygen.route_key()
     assert len(key) == 16
     assert key.startswith("tt")
     route = key[2:4]
@@ -122,7 +122,7 @@ def test_rtkey():
 def test_factory_constructor():
     keygen = KeyGen.create("ZZ")
     console.log(keygen)
-    key = keygen.rtkey()
+    key = keygen.route_key()
     assert len(key) == 16
     assert key.startswith("ZZ")
     route = key[2:4]
@@ -135,4 +135,4 @@ if __name__ == "__main__":
     test_txkey()
     test_base62()
     test_counter()
-    test_rtkey()
+    test_route_key()
