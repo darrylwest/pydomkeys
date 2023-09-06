@@ -87,7 +87,7 @@ Examples for routing key generator `route_key()`...
     >>> keygen = KeyGen(router=router)
     >>> keygen.route_key()
     'usH67l0fKBYkbOc1'
-    >>> key = keygen.txkey()
+    >>> key = keygen.route_key()
     >>> assert len(key) == 16
 ```
 
@@ -98,7 +98,7 @@ Or, use the factory method `create` to get a new instance...
     >>> keygen = KeyGen.create("US")
     >>> keygen.route_key()
     'USH67l0fKBYkbOc1'
-    >>> key = keygen.txkey()
+    >>> key = keygen.route_key()
     >>> route_number = int(key[2:4], 16)
     >>> assert route_number < 256
 ```
