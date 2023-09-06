@@ -1,5 +1,15 @@
 """A library for domain entity key generation identifiers.
 
+This small support module encodes integers of any size to base62 using a
+default dictionary of digits 0-9, uppercase A-Z and lowercase a-z.
+
+Examples:
+--------
+    >>> from pydomkeys.base62 import Base62
+    >>> base62 = Base62()
+    >>> base62.encode(123456789)
+    '8M0kX'
+
 Author: darryl.west
 Date: 2023-08-26
 """

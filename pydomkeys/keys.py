@@ -102,7 +102,12 @@ class KeyGen:
         base62: Optional[Base62] = None,
         counter: Optional[Counter] = None,
     ):
-        """Initialize the base62 worker and counter."""
+        """Initialize the base62 worker and counter.
+
+        The default constructor creates Base62 and Counter instances in thier
+        default states.  See those modules for ways to change the alphabet or
+        min/max counter ranges.
+        """
         self.domain_router = domain_router
         base62 = Base62() if base62 is None else base62
         counter = Counter() if counter is None else counter
@@ -116,7 +121,23 @@ class KeyGen:
 
     @classmethod
     def create(cls, domain: str) -> Self:
-        """Create a standard KeyGen instance with the given domain string."""
+        """Create a standard KeyGen instance with the given domain string.
+
+        Examples:
+        --------
+            >>> from pydomkeys.keys import KeyGen
+            >>> keygen = KeyGen.create("CG")
+            >>> keygen.base62.alphabet
+            '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+            >>> keygen.counter.min
+            3850
+            >>> keygen.counter.max
+            238000
+            >>> key = keygen.rtkey()
+            >>> assert len(key) == 16
+
+
+        """
         return cls(DomainRouter(domain))
 
     def txkey(self, milliseconds: Optional[int] = None):
