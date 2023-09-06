@@ -12,6 +12,13 @@ _A python library for domain entity key generation identifiers e.g., user, provi
 
 ### Overview
 
+Our primary objective is to minimize key sizes when used with key/value stores like Redis.  Domain keys are gauranteed to be unique for a given domain.  For example, your set of 
+users may grow into the 10s or 100s of millions.  You need a unique identifier for each.  You don't need a globally unique identifier because these keys are restricted to just your users.
+
+Rather than use a V4 UUID with 36 characters, it's much better to use a shorter key based on the same technology--a combination of date-time and random numbers.  If you restrict a key
+to a specific domain, e.g., users, customers, businesses, etc, the key can be reduced to a combination of a millisecond time stamp and either a random number, or a counter--especially
+if the counter range is in the 200K.  Add a bit of random number generation and a two character domain prefix, like `US`, `CU`, `BU`.
+
 #### Domain Routing Key Features...
 
 * fast, uniformly distributed random number generation based on large range (10^40?) of values
