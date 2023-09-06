@@ -14,7 +14,7 @@ test:
 # run the standard tests + clippy and fmt
 cover:
     poetry run coverage report -m
-    coverage html --title="PyDomKeys Test Coverage"
+    poetry run coverage html --title="PyDomKeys Test Coverage"
 
 format:
     black pydomkeys/ tests/
