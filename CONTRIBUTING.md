@@ -1,50 +1,52 @@
-# Welcome to PyDomKeys docs contributing guide <!-- omit in toc -->
+# Welcome to PyDomKeys contributing guide <!-- omit in toc -->
 
-Thank you for investing your time in contributing to our project! Any contribution you make will be reflected on [docs.github.com](https://docs.github.com/en) :sparkles:.
+Thank you for investing your time in contributing to our project! Any contribution you make will be reflected in [pydomkeys](https://github.com/darrylwest/pydomkeys/) :sparkles:.
 
-Read our [Code of Conduct](./CODE_OF_CONDUCT.md) to keep our community approachable and respectable.
+Please read our [Code of Conduct](./CODE_OF_CONDUCT.md) to keep our community approachable and respectable.
 
-In this guide you will get an overview of the contribution workflow from opening an issue, creating a PR, reviewing, and merging the PR.
+In this guide you will get an overview of the contribution workflow from opening an issue, creating a PR, testing, linting, etc, and merging the PR.
 
-Use the table of contents icon <img src="/contributing/images/table-of-contents.png" width="25" height="25" /> on the top left corner of this document to get to a specific section of this guide quickly.
+_Use the table of contents icon on the top left corner of this document to get to a specific section of this guide quickly._
 
 ## New contributor guide
 
 To get an overview of the project, read the [README](README.md). Here are some resources to help you get started with open source contributions:
 
-- [Finding ways to contribute to open source on GitHub](https://docs.github.com/en/get-started/exploring-projects-on-github/finding-ways-to-contribute-to-open-source-on-github)
 - [Set up Git](https://docs.github.com/en/get-started/quickstart/set-up-git)
-- [GitHub flow](https://docs.github.com/en/get-started/quickstart/github-flow)
 - [Collaborating with pull requests](https://docs.github.com/en/github/collaborating-with-pull-requests)
 
 
 ## Getting started
 
-To navigate our codebase with confidence, see [the introduction to working in the docs repository](/contributing/working-in-docs-repository.md) :confetti_ball:. For more information on how we write our markdown files, see [the GitHub Markdown reference](contributing/content-markup-reference.md).
 
-Check to see what [types of contributions](/contributing/types-of-contributions.md) we accept before making changes. Some of them don't even require writing a single line of code :sparkles:.
+### Development Tools
+
+* poetry for package manager (could change to pdm soon)
+* pytest, pytest-cov
+* coverage
+* pylint, and ruff linters
+* mypy
+* refurb
+
+We also currently use [just](https://github.com/casey/just) as a command line runner, but it's not a requirement.  And, if we switch to pdm, we would use thier script support to eliminate just.  In any case, the command targets in the justfile can easily be executed on the command line.
+
+### Code Coverage
+
+We expect a minimum of 100% code coverage for this project.
 
 ### Issues
 
 #### Create a new issue
 
-If you spot a problem with the docs, [search if an issue already exists](https://docs.github.com/en/github/searching-for-information-on-github/searching-on-github/searching-issues-and-pull-requests#search-by-the-title-body-or-comments). If a related issue doesn't exist, you can open a new issue using a relevant [issue form](https://github.com/github/docs/issues/new/choose).
+If you spot a problem with the docs or a bug in the code, first search the issues to see if this has been reported.  If a relevant issue is not in the list then feel free to create one.
 
 #### Solve an issue
 
-Scan through our [existing issues](https://github.com/github/docs/issues) to find one that interests you. You can narrow down the search using `labels` as filters. See [Labels](/contributing/how-to-use-labels.md) for more information. As a general rule, we don’t assign issues to anyone. If you find an issue to work on, you are welcome to open a PR with a fix.
+Scan through our to find one that interests you. You can narrow down the search using `labels` as filters. See [Labels](/contributing/how-to-use-labels.md) for more information.
 
 ### Make Changes
 
-#### Make changes in the UI
-
-Click **Make a contribution** at the bottom of any docs page to make small changes such as a typo, sentence fix, or a broken link. This takes you to the `.md` file where you can make your changes and [create a pull request](#pull-request) for a review.
-
- <img src="/contributing/images/contribution_cta.png" />
-
-#### Make changes in a codespace
-
-For more information about using a codespace for working on GitHub documentation, see "[Working in a codespace](https://github.com/github/docs/blob/main/contributing/codespace.md)."
+_TBD_
 
 #### Make changes locally
 
@@ -56,13 +58,13 @@ For more information about using a codespace for working on GitHub documentation
 - Using the command line:
   - [Fork the repo](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo#fork-an-example-repository) so that you can make your changes without affecting the original project until you're ready to merge them.
 
-2. Install or update to **Node.js**, at the version specified in `.node-version`. For more information, see [the development guide](contributing/development.md).
+2. Install the package manager if necessary and install all the dependencies (poetry install)
 
-3. Create a working branch and start with your changes!
+3. Create a working branch and start with your changes!  The branch should have a short name and the issue number you are working on.
 
 ### Commit your update
 
-Commit the changes once you are happy with them. Don't forget to [self-review](/contributing/self-review.md) to speed up the review process:zap:.
+Commit the changes once you are happy with them. Don't forget to [self-review](/contributing/self-review.md) to speed up the review process:zap:. (see precommit target)
 
 ### Pull Request
 
@@ -77,19 +79,8 @@ Once you submit your PR, a Docs team member will review your proposal. We may as
 
 ### Your PR is merged!
 
-Congratulations :tada::tada: The GitHub team thanks you :sparkles:.
+Congratulations :tada::tada: The PyDomKeys team thanks you :sparkles:.
 
-Once your PR is merged, your contributions will be publicly visible on the [GitHub docs](https://docs.github.com/en).
+Once your PR is merged, your contributions will be publicly visible on the PyDomKeys repo.
 
-Now that you are part of the GitHub docs community, see how else you can [contribute to the docs](/contributing/types-of-contributions.md).
-
-## Windows
-
-This site can be developed on Windows, however a few potential gotchas need to be kept in mind:
-
-1. Regular Expressions: Windows uses `\r\n` for line endings, while Unix-based systems use `\n`. Therefore, when working on Regular Expressions, use `\r?\n` instead of `\n` in order to support both environments. The Node.js [`os.EOL`](https://nodejs.org/api/os.html#os_os_eol) property can be used to get an OS-specific end-of-line marker.
-2. Paths: Windows systems use `\` for the path separator, which would be returned by `path.join` and others. You could use `path.posix`, `path.posix.join` etc and the [slash](https://ghub.io/slash) module, if you need forward slashes - like for constructing URLs - or ensure your code works with either.
-3. Bash: Not every Windows developer has a terminal that fully supports Bash, so it's generally preferred to write [scripts](/script) in JavaScript instead of Bash.
-4. Filename too long error: There is a 260 character limit for a filename when Git is compiled with `msys`. While the suggestions below are not guaranteed to work and could cause other issues, a few workarounds include:
-    - Update Git configuration: `git config --system core.longpaths true`
-    - Consider using a different Git client on Windows
+Thanks, happy coding!
