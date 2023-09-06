@@ -42,6 +42,7 @@ mypy = "^1.5.1"
 perf8 = "^0.0.1"
 refurb = "^1.20.0"
 rich = "^13.5.2"
+sphinx = "^7"
 
 [tool.ruff]
 # Enable the pycodestyle (`E`) and Pyflakes (`F`) rules by default.
