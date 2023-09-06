@@ -103,6 +103,10 @@ Or, use the factory method `create` to get a new instance...
     >>> assert route_number < 256
 ```
 
+### Contributing
+
+Interested in contributing to this project?  If so, check our our [contributing guidelines](./CONTRIBUTING.md) document as well as our [code of conduct](./CODE_OF_CONDUCT.md).
+
 ### References
 
 * [Base62 Defined](https://en.wikipedia.org/wiki/Base62)
@@ -111,7 +115,7 @@ Or, use the factory method `create` to get a new instance...
 * [Using Numpy Random Generator](https://realpython.com/numpy-random-number-generator/)
 * [NumPy Random](https://numpy.org/doc/stable/reference/random/index.html)
 
-## License
+### License
 
 Except where noted (below and/or in individual files), all code in this repository is dual-licensed under either:
 
