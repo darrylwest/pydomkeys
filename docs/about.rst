@@ -28,26 +28,13 @@ This is a life saver for startups that should think about sharding, but don't re
 Domain Routing Key Features...
 ------------------------------
 
-* fast, uniformly distributed random number generation based on large range (10^40?) of values
-* time based to the microsecond
-* base62 encoded for size reduction: `[0-9][A-Z][a-z]`
-* routing key is always 16 characters, 9 date and 7 random including routing key (first two chars)
-* similar to UUID V7 where a timestamp is mixed with random, specifically random + timestamp(micros) + random
-* route-able, not sortable (_although sort_by could be implemented for the timestamp portion of the key_)
-* short, time based keys from _txkey_ generate 12 character keys.
+    * fast, uniformly distributed random number generation based on large range (10^40?) of values
+    * time based to the microsecond
+    * base62 encoded for size reduction: ``[0-9][A-Z][a-z]``
+    * routing key is always 16 characters, 9 date and 7 random including routing key (first two chars)
+    * similar to UUID V7 where a timestamp is mixed with random, specifically random + timestamp(micros) + random
+    * route-able, not sortable (_although sort_by could be implemented for the timestamp portion of the key_)
+    * short, time based keys from _txkey_ generate 12 character keys.
 
-The goal of the random number generation is speed and uniformity--not security.  Domain keys are suitable for identifying elements in a specific domain.  Uniformaty is important for routing to insure equally.
+The goal of the random number generation is speed and uniformity-- not security.  Domain keys are suitable for identifying elements in a specific domain.  Uniformaty is important for routing to insure equally.
 
-
-License
-=======
-
-Except where noted (below and/or in individual files), all code in this repository is dual-licensed under either:
-
-* MIT License ([LICENSE-MIT](LICENSE-MIT) or [http://opensource.org/licenses/MIT](http://opensource.org/licenses/MIT))
-* Apache License, Version 2.0 ([LICENSE-APACHE](LICENSE-APACHE) or [http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0))
-
-Revision
-========
-
-PyDomKeys | 2023.09.06
