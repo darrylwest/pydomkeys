@@ -18,7 +18,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -e .
-          pip install pydomkeys furo
+          pip install pydomkeys furo sphinx-multiversion
       - name: Sphinx build
         run: |
           sphinx-apidoc -o docs pydomkeys/ --separate

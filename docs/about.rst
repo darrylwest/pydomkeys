@@ -33,7 +33,7 @@ Domain Routing Key Features...
     * base62 encoded for size reduction: ``[0-9][A-Z][a-z]``
     * routing key is always 16 characters, 9 date and 7 random including routing key (first two chars)
     * similar to UUID V7 where a timestamp is mixed with random, specifically random + timestamp(micros) + random
-    * route-able, not sortable (_although sort_by could be implemented for the timestamp portion of the key_)
+    * route-able, not sortable (although sort_by could be implemented for the timestamp portion of the key)
     * short, time based keys from _txkey_ generate 12 character keys.
 
 The goal of the random number generation is speed and uniformity-- not security.  Domain keys are suitable for identifying elements in a specific domain.  Uniformaty is important for routing to insure equally.

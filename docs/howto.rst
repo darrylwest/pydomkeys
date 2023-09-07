@@ -15,7 +15,7 @@ If you need to generate a key that is truely globally unique, then use v4 UUID. 
 Installation
 ============
 
-NOTE: _this package is still in development and not available yet_
+NOTE: this package is still in development and not available yet
 
 ``pip install pydomkeys``
 
