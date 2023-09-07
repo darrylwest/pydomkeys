@@ -9,7 +9,7 @@ alias pre := precommit
 
 # run the standard tests (default target)
 test:
-    poetry run pytest --cov=pydomkeys/ --cov-branch
+    poetry run pytest --cov=pydomkeys/ --cov-branch tests/
 
 # run the standard tests + clippy and fmt
 cover:
