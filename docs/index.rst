@@ -16,6 +16,6 @@
 .. toctree::
     :maxdepth: 1
 
-    About the *pydomkeys* project <about>
+    About pydomkeys project <about>
     Installation and usage <howto>
     Reference to terms and features <glossary>

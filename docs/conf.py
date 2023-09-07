@@ -34,7 +34,25 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.napoleon',
     'sphinx.ext.githubpages',
+    'sphinx_multiversion',
 ]
+
+# autoclass_content = 'both'
+# html_favicon = '_static/favicon.io'
+
+templates_path = [
+    "_templates",
+]
+html_sidebars = {
+    "**": [
+        "sidebar/brand.html",
+        "sidebar/search.html",
+        "sidebar/scroll-start.html",
+        "sidebar/navigation.html",
+        "sidebar/versions.html",
+        "sidebar/scroll-end.html",
+    ],
+}
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 source_suffix = [".rst", ".md"]
 
