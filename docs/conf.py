@@ -32,6 +32,8 @@ master_doc = 'index'
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
+    'sphinx.ext.napoleon',
+    'sphinx.ext.githubpages',
 ]
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 source_suffix = [".rst", ".md"]
