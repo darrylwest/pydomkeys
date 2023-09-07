@@ -12,7 +12,6 @@
 #
 import os
 import sys
-import pydomkeys
 
 sys.path.insert(0, os.path.abspath('..'))
 sys.path.insert(0, os.path.abspath('../pydomkeys'))
@@ -24,7 +23,7 @@ project = 'pydomkeys'
 copyright = '2023, Darryl West'
 author = 'Darryl West'
 master_doc = 'index'
-version = pydomkeys.__version__
+# version = pydomkeys.__version__
 
 # -- General configuration ---------------------------------------------------
 
