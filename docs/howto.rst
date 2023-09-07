@@ -61,15 +61,9 @@ Or, use the factory method ``create`` to get a new instance...
 
 
 
-### Contributing
+Contribute to ``pydomkeys``
+---------------------------
 
 Interested in contributing to this project?  If so, check our our [contributing guidelines](./CONTRIBUTING.md) document as well as our [code of conduct](./CODE_OF_CONDUCT.md).
-
-### Changelog
-
-We are currently in alpha, so lots of changes are possible.  But the project is small, so it won't be long until we go to beta.
-We will do a minor version bump when we come out of alpha.
-
-We won't have a specific changelog until we are in beta.
 
 
