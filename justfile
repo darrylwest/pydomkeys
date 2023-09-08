@@ -38,6 +38,9 @@ mypy:
 refurb:
     poetry run refurb pydomkeys/ tests/
 
+docs:
+    poetry run sphinx-multiversion docs ./docs/_build/html
+
 precommit:
     clear
     just test cover format ruff refurb mypy
