@@ -36,7 +36,7 @@ mypy:
     poetry run mypy pydomkeys/
 
 refurb:
-    refurb pydomkeys/ tests/
+    poetry run refurb pydomkeys/ tests/
 
 precommit:
     clear
