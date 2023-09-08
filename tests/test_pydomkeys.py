@@ -129,6 +129,14 @@ def test_factory_constructor():
     assert int(route, 16) < 256
 
 
+def test_parse_route():
+    keygen = KeyGen.create("us")
+    key = keygen.route_key()
+    shard_count = 4
+    shard = keygen.parse_route(key, shard_count)
+    assert shard < 4
+
+
 if __name__ == "__main__":
     args = sys.argv[1:]
 

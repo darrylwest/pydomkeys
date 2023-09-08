@@ -152,9 +152,25 @@ class KeyGen:
 
         return f"{key}{suffix}"
 
-    # TODO(dpw): implement this
     def route_key(self, milliseconds: Optional[int] = None):
-        """Return a routing key, always 16 characters base62 encoded."""
+        """Return a routing key, always 16 characters base62 encoded.
+
+        Routing is a way to future-proof your application by preparing for sharding.  The route key
+        has two characters reserved for randomly routing between up to 256 shards.  The practical way
+        to scale from no shards to mulitples, say 2, 4, 8, etc. without changing any data would be to
+        intercept database reads and writes for specific domains, lets say users and use the routing
+        key to point to the appropriate shard.
+
+        Examples:
+        --------
+            >>> from pydomkeys.keys import KeyGen
+            >>> keygen = KeyGen.create("US") # a user domain key generator
+            >>> key = keygen.route_key()
+            >>> print(key)
+            USec7l4yy4kG56VN
+            >>> assert len(key) == 16
+
+        """
         milliseconds = time.time_ns() // 1_000 if milliseconds is None else milliseconds
 
         key = self.txkey(milliseconds)
@@ -162,3 +178,9 @@ class KeyGen:
         route = self.domain_router.route()
 
         return f"{prefix}{route}{key}"
+
+    def parse_route(self, key: str, shard_count) -> int:
+        """Parse the route from the key and return the route number based on the number of shards."""
+        route = int(key[2:4], 16)
+
+        return route % shard_count
