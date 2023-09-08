@@ -76,9 +76,11 @@ class Counter:
 class DomainRouter:
     """Domain Router class used to generate domain and route prefix for route_key."""
 
-    def __init__(self, domain: str):
+    def __init__(self, domain: str, shard_count: int):
         """Initialise DomainRouter with a two character domain label and optional route-generator."""
         self.domain_key = domain
+        self.max_route_size = 256
+        self.shard_count = shard_count
 
     def __repr__(self):
         """Show the domain key."""
@@ -90,7 +92,7 @@ class DomainRouter:
 
     def route(self) -> str:
         """Return the random routing/shard key, usually two characters 00 through ff for one of 256 routes."""
-        return f"{dflt_rng.integers(0, 256):02x}"
+        return f"{dflt_rng.integers(0, self.max_route_size):02x}"
 
 
 class KeyGen:
@@ -120,7 +122,7 @@ class KeyGen:
         return f"router: {self.domain_router}, base62: {self.base62}, counter: {self.counter}"
 
     @classmethod
-    def create(cls, domain: str) -> Self:
+    def create(cls, domain: str, shard_count: Optional[int] = None) -> Self:
         """Create a standard KeyGen instance with the given domain string.
 
         Examples:
@@ -137,7 +139,8 @@ class KeyGen:
             >>> assert len(key)
 
         """
-        return cls(DomainRouter(domain))
+        shard_count = 1 if shard_count is None else shard_count
+        return cls(DomainRouter(domain, shard_count))
 
     def txkey(self, milliseconds: Optional[int] = None):
         """Generate a new 12 character txkey with the current counter."""
@@ -164,7 +167,8 @@ class KeyGen:
         Examples:
         --------
             >>> from pydomkeys.keys import KeyGen
-            >>> keygen = KeyGen.create("US") # a user domain key generator
+            >>> shard_count = 8
+            >>> keygen = KeyGen.create("US", shard_count) # a user domain key generator
             >>> key = keygen.route_key()
             >>> print(key)
             USec7l4yy4kG56VN

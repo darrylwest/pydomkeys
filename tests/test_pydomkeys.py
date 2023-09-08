@@ -15,7 +15,7 @@ console = Console()
 def test_txkey():
     """Test the txkey."""
     console.rule("Default KeyGen.txkey")
-    router = DomainRouter("tt")
+    router = DomainRouter("tt", 1)
     keygen = KeyGen(domain_router=router)
 
     lastkey = None
@@ -69,7 +69,8 @@ def test_counter():
 
 def test_domain_router():
     dom = "US"
-    domr = DomainRouter(domain=dom)
+    shard_count = 4
+    domr = DomainRouter(domain=dom, shard_count=shard_count)
     console.log(domr)
     assert isinstance(domr, DomainRouter)
 
@@ -110,7 +111,7 @@ def test_base62():
 
 def test_route_key():
     """Test the route_key."""
-    router = DomainRouter("tt")
+    router = DomainRouter("tt", 8)
     keygen = KeyGen(domain_router=router)
     key = keygen.route_key()
     assert len(key) == 16
@@ -130,11 +131,11 @@ def test_factory_constructor():
 
 
 def test_parse_route():
-    keygen = KeyGen.create("us")
-    key = keygen.route_key()
     shard_count = 4
+    keygen = KeyGen.create("us", shard_count)
+    key = keygen.route_key()
     shard = keygen.parse_route(key, shard_count)
-    assert shard < 4
+    assert shard < shard_count
 
 
 if __name__ == "__main__":
