@@ -84,7 +84,7 @@ class DomainRouter:
 
     def __repr__(self):
         """Show the domain key."""
-        return f"domain key: {self.domain_key}"
+        return f"domain key: {self.domain_key}, shards: {self.shard_count}"
 
     def domain(self) -> str:
         """Return the domain key, usually two characters."""
@@ -167,8 +167,7 @@ class KeyGen:
         Examples:
         --------
             >>> from pydomkeys.keys import KeyGen
-            >>> shard_count = 8
-            >>> keygen = KeyGen.create("US", shard_count) # a user domain key generator
+            >>> keygen = KeyGen.create("US") # a user domain key generator
             >>> key = keygen.route_key()
             >>> print(key)
             USec7l4yy4kG56VN
@@ -183,8 +182,26 @@ class KeyGen:
 
         return f"{prefix}{route}{key}"
 
-    def parse_route(self, key: str, shard_count) -> int:
-        """Parse the route from the key and return the route number based on the number of shards."""
+    def parse_route(self, key: str) -> int:
+        """Parse the route from the key and return the route number based on the number of shards.
+
+        Parse the database shard route number as configured in the key generator.
+
+        Examples:
+        --------
+            >>> from pydomkeys.keys import KeyGen
+            >>> shard_count = 8
+            >>> user_keygen = KeyGen.create(domain="US", shard_count=shard_count) # a user domain key generator
+            >>> key = user_keygen.route_key()
+            >>> print(key)
+            US4e7l52VCYlQmbm
+            >>> assert len(key) == 16
+            >>> db_route = keygen.parse_route(key)
+            >>> print(db_route)
+            6
+            >>> assert db_route < shard_count
+
+        """
         route = int(key[2:4], 16)
 
-        return route % shard_count
+        return route % self.domain_router.shard_count

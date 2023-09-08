@@ -134,7 +134,7 @@ def test_parse_route():
     shard_count = 4
     keygen = KeyGen.create("us", shard_count)
     key = keygen.route_key()
-    shard = keygen.parse_route(key, shard_count)
+    shard = keygen.parse_route(key)
     assert shard < shard_count
 
 
