@@ -10,7 +10,7 @@
     |_____/|_____|__|__|__|___._||__||__|__| |__|\__||_____|___  |_____||_____|
 
 
-.. note:: A python library for unique domain-entity key generation e.g., user, provider, inventory item, etc. based on the [rust project](https://github.com/darrylwest/domain-keys/tree/main).
+.. note:: A python library for unique domain-entity key generation for shard-ready db applications. Based on the [rust project](https://github.com/darrylwest/domain-keys/tree/main).
 
 
 .. toctree::
