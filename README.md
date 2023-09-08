@@ -8,7 +8,7 @@
                                                        |_____|
 ```
 
-_A python library for domain entity key generation identifiers e.g., user, provider, inventory item, etc. based on the [rust project](https://github.com/darrylwest/domain-keys/tree/main)._
+*A python library for domain entity key generation identifiers e.g., user, provider, inventory item, etc. based on the [rust project](https://github.com/darrylwest/domain-keys/tree/main).*
 
 ### Overview
 
@@ -41,7 +41,7 @@ This is a life saver for startups that should think about sharding, but don't re
 * base62 encoded for size reduction: `[0-9][A-Z][a-z]`
 * routing key is always 16 characters, 9 date and 7 random including routing key (first two chars)
 * similar to UUID V7 where a timestamp is mixed with random, specifically random + timestamp(micros) + random
-* route-able, not sortable (_although sort_by could be implemented for the timestamp portion of the key_)
+* route-able, not sortable (although sort_by could be implemented for the timestamp portion of the key)
 * short, time based keys from _txkey_ generate 12 character keys.
 
 The goal of the random number generation is speed and uniformity--not security.  Domain keys are suitable for identifying elements in a specific domain.  Uniformaty is important for routing to insure equally.
@@ -60,7 +60,7 @@ If you need to generate a key that is truely globally unique, then use v4 UUID. 
 
 ### Installation
 
-NOTE: _this package is still in development and not available yet_
+NOTE: *this package is still in development and not available yet*
 
 `pip install pydomkeys`
 
@@ -95,12 +95,15 @@ Or, use the factory method `create` to get a new instance...
 
 ```python
     >>> from pydomkeys.keys import KeyGen
-    >>> keygen = KeyGen.create("US")
-    >>> keygen.route_key()
-    'USH67l0fKBYkbOc1'
+    >>> shard_count = 4
+    >>> keygen = KeyGen.create(domain="US", shard_count=shard_count)
     >>> key = keygen.route_key()
-    >>> route_number = int(key[2:4], 16)
-    >>> assert route_number < 256
+    >>> print(key)
+    'US4e7l52VCYlQmbm'
+    >>> db_route = keygen.parse_route(key)
+    >>> print(db_route)
+    6
+    >>> assert db_route < shard_count
 ```
 
 ### Contributing
@@ -129,4 +132,4 @@ Except where noted (below and/or in individual files), all code in this reposito
 * MIT License ([LICENSE-MIT](LICENSE-MIT) or [http://opensource.org/licenses/MIT](http://opensource.org/licenses/MIT))
 * Apache License, Version 2.0 ([LICENSE-APACHE](LICENSE-APACHE) or [http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0))
 
-###### PyDomKeys | 2023.09.06
+###### PyDomKeys | 2023.09.08

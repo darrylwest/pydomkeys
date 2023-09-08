@@ -76,13 +76,15 @@ class Counter:
 class DomainRouter:
     """Domain Router class used to generate domain and route prefix for route_key."""
 
-    def __init__(self, domain: str):
+    def __init__(self, domain: str, shard_count: int):
         """Initialise DomainRouter with a two character domain label and optional route-generator."""
         self.domain_key = domain
+        self.max_route_size = 256
+        self.shard_count = shard_count
 
     def __repr__(self):
         """Show the domain key."""
-        return f"domain key: {self.domain_key}"
+        return f"domain key: {self.domain_key}, shards: {self.shard_count}"
 
     def domain(self) -> str:
         """Return the domain key, usually two characters."""
@@ -90,7 +92,7 @@ class DomainRouter:
 
     def route(self) -> str:
         """Return the random routing/shard key, usually two characters 00 through ff for one of 256 routes."""
-        return f"{dflt_rng.integers(0, 256):02x}"
+        return f"{dflt_rng.integers(0, self.max_route_size):02x}"
 
 
 class KeyGen:
@@ -120,7 +122,7 @@ class KeyGen:
         return f"router: {self.domain_router}, base62: {self.base62}, counter: {self.counter}"
 
     @classmethod
-    def create(cls, domain: str) -> Self:
+    def create(cls, domain: str, shard_count: Optional[int] = None) -> Self:
         """Create a standard KeyGen instance with the given domain string.
 
         Examples:
@@ -137,7 +139,8 @@ class KeyGen:
             >>> assert len(key)
 
         """
-        return cls(DomainRouter(domain))
+        shard_count = 1 if shard_count is None else shard_count
+        return cls(DomainRouter(domain, shard_count))
 
     def txkey(self, milliseconds: Optional[int] = None):
         """Generate a new 12 character txkey with the current counter."""
@@ -152,9 +155,25 @@ class KeyGen:
 
         return f"{key}{suffix}"
 
-    # TODO(dpw): implement this
     def route_key(self, milliseconds: Optional[int] = None):
-        """Return a routing key, always 16 characters base62 encoded."""
+        """Return a routing key, always 16 characters base62 encoded.
+
+        Routing is a way to future-proof your application by preparing for sharding.  The route key
+        has two characters reserved for randomly routing between up to 256 shards.  The practical way
+        to scale from no shards to mulitples, say 2, 4, 8, etc. without changing any data would be to
+        intercept database reads and writes for specific domains, lets say users and use the routing
+        key to point to the appropriate shard.
+
+        Examples:
+        --------
+            >>> from pydomkeys.keys import KeyGen
+            >>> keygen = KeyGen.create("US") # a user domain key generator
+            >>> key = keygen.route_key()
+            >>> print(key)
+            USec7l4yy4kG56VN
+            >>> assert len(key) == 16
+
+        """
         milliseconds = time.time_ns() // 1_000 if milliseconds is None else milliseconds
 
         key = self.txkey(milliseconds)
@@ -162,3 +181,27 @@ class KeyGen:
         route = self.domain_router.route()
 
         return f"{prefix}{route}{key}"
+
+    def parse_route(self, key: str) -> int:
+        """Parse the route from the key and return the route number based on the number of shards.
+
+        Parse the database shard route number as configured in the key generator.
+
+        Examples:
+        --------
+            >>> from pydomkeys.keys import KeyGen
+            >>> shard_count = 8
+            >>> user_keygen = KeyGen.create(domain="US", shard_count=shard_count) # a user domain key generator
+            >>> key = user_keygen.route_key()
+            >>> print(key)
+            US4e7l52VCYlQmbm
+            >>> assert len(key) == 16
+            >>> db_route = keygen.parse_route(key)
+            >>> print(db_route)
+            6
+            >>> assert db_route < shard_count
+
+        """
+        route = int(key[2:4], 16)
+
+        return route % self.domain_router.shard_count

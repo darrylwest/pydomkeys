@@ -6,6 +6,7 @@ export PYTHONPATH := "pydomkeys/"
 alias cov := cover
 alias form := format
 alias pre := precommit
+alias todo := todos
 
 # run the standard tests (default target)
 test:
