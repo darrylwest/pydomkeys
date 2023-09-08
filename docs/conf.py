@@ -19,10 +19,22 @@ sys.path.insert(0, os.path.abspath('../pydomkeys'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'pydomkeys'
-copyright = '2023, Darryl West'
+project = 'PyDomKeys'
 author = 'Darryl West'
+
+from datetime import datetime
+year = datetime.now().year
+if year > 2023:
+    copyright = f'2023-{year}, {author}'
+else:
+    copyright = f'2023, {author}'
+
 master_doc = 'index'
+
+import imp
+mod = imp.load_source('pydomkeys', '../pydomkeys/__init__.py')
+release = mod.__version__
+
 # version = pydomkeys.__version__
 
 # -- General configuration ---------------------------------------------------
