@@ -6,8 +6,7 @@ authors = ["darryl west <dpw@raincitysoftware.com>"]
 readme = "README.md"
 license = "MIT"
 packages = [{include = "pydomkeys"}]
-keywords = ["redis", "short-keys", "database", "key-value", "key-value-store"]
-# keywords = ["no-sql", "redis", "short-keys", "database", "key-value", "key-value-store"]
+keywords = ["no-sql", "redis", "short-keys", "database", "key-value", "key-value-store"]
 classifiers = [
     "Topic :: Database",
     "Topic :: Software Development :: Libraries",
@@ -17,10 +16,6 @@ classifiers = [
 [tool.poetry.dependencies]
 python = "^3.11"
 numpy = "^1.25.2"
-ruff = "^0.0.287"
-sphinx = "^7.2.5"
-furo = "^2023.8.19"
-sphinx-multiversion = "^0.2.4"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.0"
@@ -33,9 +28,9 @@ mypy = "^1.5.1"
 perf8 = "^0.0.1"
 refurb = "^1.20.0"
 rich = "^13.5.2"
+ruff = "^0.0.287"
 
 [tool.poetry.group.doc.dependencies]
-furo = "^2023.8.19"
 pytest = "^7.4.0"
 black = "^23.7.0"
 pytest-cov = "^4.1.0"
@@ -46,7 +41,9 @@ mypy = "^1.5.1"
 perf8 = "^0.0.1"
 refurb = "^1.20.0"
 rich = "^13.5.2"
-sphinx = "^7"
+sphinx = "^7.2.5"
+furo = "^2023.8.19"
+sphinx-multiversion = "^0.2.4"
 
 [tool.ruff]
 # Enable the pycodestyle (`E`) and Pyflakes (`F`) rules by default.
