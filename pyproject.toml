@@ -6,8 +6,7 @@ authors = ["darryl west <dpw@raincitysoftware.com>"]
 readme = "README.md"
 license = "MIT"
 packages = [{include = "pydomkeys"}]
-keywords = ["redis", "short-keys", "database", "key-value", "key-value-store"]
-# keywords = ["no-sql", "redis", "short-keys", "database", "key-value", "key-value-store"]
+keywords = ["no-sql", "redis", "short-keys", "database", "key-value", "key-value-store"]
 classifiers = [
     "Topic :: Database",
     "Topic :: Software Development :: Libraries",
