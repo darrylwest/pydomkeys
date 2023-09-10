@@ -13,6 +13,7 @@ import tomllib
 
 console = Console()
 
+# TODO(dpw): write a test to ensure the keys are uniformally random over a set of 4, 8, and 16 shards
 
 def test_txkey():
     """Test the txkey."""

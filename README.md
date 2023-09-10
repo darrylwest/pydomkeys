@@ -122,8 +122,6 @@ We won't have a specific changelog until we are in beta.
 * [Base62 Defined](https://en.wikipedia.org/wiki/Base62)
 * [UUID RFC4122](https://datatracker.ietf.org/doc/html/rfc4122.html)
 * [PCG Fast Algos for Random Number Generation](https://www.pcg-random.org/pdf/hmc-cs-2014-0905.pdf)
-* [Using Numpy Random Generator](https://realpython.com/numpy-random-number-generator/)
-* [NumPy Random](https://numpy.org/doc/stable/reference/random/index.html)
 
 ### License
 
