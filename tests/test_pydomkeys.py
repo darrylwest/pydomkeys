@@ -15,6 +15,20 @@ console = Console()
 
 # TODO(dpw): write a test to ensure the keys are uniformally random over a set of 4, 8, and 16 shards
 
+
+def test_version():
+    from pydomkeys import __version__ as vers
+
+    assert vers.startswith("0.3.")
+    with Path.open(
+        "./pyproject.toml",
+        "rb",
+    ) as f:
+        project = tomllib.load(f)
+
+    assert vers == project["tool"]["poetry"]["version"]
+
+
 def test_txkey():
     """Test the txkey."""
     console.rule("Default KeyGen.txkey")
@@ -139,19 +153,6 @@ def test_parse_route():
     key = keygen.route_key()
     shard = keygen.parse_route(key)
     assert shard < shard_count
-
-
-def test_version():
-    from pydomkeys import __version__ as vers
-
-    assert vers.startswith("0.3.")
-    with Path.open(
-        "./pyproject.toml",
-        "rb",
-    ) as f:
-        project = tomllib.load(f)
-
-    assert vers == project["tool"]["poetry"]["version"]
 
 
 if __name__ == "__main__":
