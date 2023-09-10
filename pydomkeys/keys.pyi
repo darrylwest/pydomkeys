@@ -10,7 +10,10 @@ dflt_rng: Incomplete
 class Counter:
     count: Incomplete
     def __init__(
-        self, x_min: int = ..., x_max: int = ..., start: int = ...,
+        self,
+        x_min: int = ...,
+        x_max: int = ...,
+        start: int = ...,
     ) -> None: ...
     def next_count(self) -> int: ...
     def reset(self) -> int: ...
