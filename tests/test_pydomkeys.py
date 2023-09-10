@@ -8,6 +8,8 @@ from datetime import datetime
 
 from pydomkeys.keys import KeyGen, Counter, DomainRouter
 from pydomkeys.base62 import Base62
+from pathlib import Path
+import tomllib
 
 console = Console()
 
@@ -136,6 +138,19 @@ def test_parse_route():
     key = keygen.route_key()
     shard = keygen.parse_route(key)
     assert shard < shard_count
+
+
+def test_version():
+    from pydomkeys import __version__ as vers
+
+    assert vers == "0.3.2"
+    with Path.open(
+        "./pyproject.toml",
+        "rb",
+    ) as f:
+        project = tomllib.load(f)
+
+    assert vers == project["tool"]["poetry"]["version"]
 
 
 if __name__ == "__main__":
