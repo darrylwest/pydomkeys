@@ -1,0 +1,9 @@
+from _typeshed import Incomplete
+
+DEFAULT_ALPHABET: Incomplete
+
+class Base62:
+    alphabet: Incomplete
+    def __init__(self, alphabet: str = ...) -> None: ...
+    def encode(self, number: int) -> str: ...
+    def decode(self, _b62: str) -> int: ...
