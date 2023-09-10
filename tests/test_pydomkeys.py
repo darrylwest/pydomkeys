@@ -143,7 +143,7 @@ def test_parse_route():
 def test_version():
     from pydomkeys import __version__ as vers
 
-    assert vers == "0.3.2"
+    assert vers.startswith("0.3.")
     with Path.open(
         "./pyproject.toml",
         "rb",

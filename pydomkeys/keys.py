@@ -27,15 +27,12 @@ Date: 2023-08-26
 
 import string
 import time
+from random import randint
 from typing import Optional, Self
-
-from numpy import random
 
 from .base62 import Base62
 
 DEFAULT_ALPHABET = string.digits + string.ascii_uppercase + string.ascii_lowercase
-
-dflt_rng = random.default_rng()
 
 
 class Counter:
@@ -49,7 +46,7 @@ class Counter:
         self.min, self.max = x_min, x_max
 
         if start < 0:
-            start = dflt_rng.integers(x_min, x_max)
+            start = randint(x_min, x_max)
 
         self.count = start
 
@@ -92,7 +89,7 @@ class DomainRouter:
 
     def route(self) -> str:
         """Return the random routing/shard key, usually two characters 00 through ff for one of 256 routes."""
-        return f"{dflt_rng.integers(0, self.max_route_size):02x}"
+        return f"{randint(0, self.max_route_size):02x}"
 
 
 class KeyGen:
