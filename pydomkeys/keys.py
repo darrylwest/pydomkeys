@@ -74,7 +74,7 @@ class DomainRouter:
     def __init__(self, domain: str, shard_count: int):
         """Initialise DomainRouter with a two character domain label and optional route-generator."""
         self.domain_key = domain
-        self.max_route_size = 256
+        self.max_route_size = 255
         self.shard_count = shard_count
 
     def __repr__(self):
