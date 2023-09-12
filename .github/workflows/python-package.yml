@@ -32,6 +32,9 @@ jobs:
     - name: Lint with ruff
       run: |
         poetry run ruff check ./pydomkeys
-    - name: Test with pytest
+    - name: Unit Tests
       run: |
         poetry run pytest --cov=pydomkeys/ --cov-branch tests/
+    - name: Doc Tests
+      run: |
+        poetry run python -m doctest pydomkeys/*.py
