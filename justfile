@@ -40,7 +40,7 @@ refurb:
 
 doctest:
     poetry run python -m doctest pydomkeys/*.py
-    echo "\033[32;1;4mdoctest ok\033[0m"
+    @echo "\033[32;1;4mdoctest ok\033[0m"
 
 docs:
     poetry run sphinx-multiversion docs ./docs/_build/html
