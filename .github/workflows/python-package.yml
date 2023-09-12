@@ -35,6 +35,9 @@ jobs:
     - name: Unit Tests
       run: |
         poetry run pytest --cov=pydomkeys/ --cov-branch tests/
+    - name: Stress Tests
+      run: |
+        poetry run ./tests/stress.py
     - name: Doc Tests
       run: |
         poetry run python -m doctest pydomkeys/*.py

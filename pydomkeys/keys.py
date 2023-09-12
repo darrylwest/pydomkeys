@@ -54,6 +54,7 @@ class Counter:
 
     def next_count(self) -> int:
         """Increment the count and return the int; roll-over to x_min when reaching x_max."""
+        # TODO(dpw): with lock...
         count = self.count + 1
         if count > self.max:
             count = self.min
@@ -108,6 +109,8 @@ class KeyGen:
         self.domain_router = domain_router
         base62 = Base62() if base62 is None else base62
         counter = Counter() if counter is None else counter
+
+        # TODO(dpw): ensure that base62 and counter are the correct objects; raise if not
 
         self.base62 = base62
         self.counter = counter
