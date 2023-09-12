@@ -10,6 +10,8 @@ shard_count = 4
 keygen = KeyGen.create("T1", shard_count)
 max_count = 100_000
 
+# TODO(dpw): add thread pool workers with mpire
+
 
 def test_txkey():
     keys = (keygen.txkey() for _ in range(max_count))
