@@ -8,9 +8,7 @@ Examples:
 --------
     >>> from pydomkeys.base62 import Base62
     >>> from pydomkeys.keys import KeyGen
-    >>> keygen = KeyGen()
-    >>> keygen.txkey()
-    '7l0QKqIlDTME'
+    >>> keygen = KeyGen("xx") # '7l0QKqIlDTME'
     >>> key = keygen.txkey()
     >>> assert len(key) == 12
     >>> key2 = keygen.txkey()
@@ -30,7 +28,7 @@ import time
 from random import randint
 from typing import Optional, Self
 
-from .base62 import Base62
+from pydomkeys.base62 import Base62
 
 DEFAULT_ALPHABET = string.digits + string.ascii_uppercase + string.ascii_lowercase
 
@@ -165,9 +163,7 @@ class KeyGen:
         --------
             >>> from pydomkeys.keys import KeyGen
             >>> keygen = KeyGen.create("US") # a user domain key generator
-            >>> key = keygen.route_key()
-            >>> print(key)
-            USec7l4yy4kG56VN
+            >>> key = keygen.route_key() # USec7l4yy4kG56VN
             >>> assert len(key) == 16
 
         """
@@ -189,13 +185,9 @@ class KeyGen:
             >>> from pydomkeys.keys import KeyGen
             >>> shard_count = 8
             >>> user_keygen = KeyGen.create(domain="US", shard_count=shard_count) # a user domain key generator
-            >>> key = user_keygen.route_key()
-            >>> print(key)
-            US4e7l52VCYlQmbm
+            >>> key = user_keygen.route_key() # US4e7l52VCYlQmbm
             >>> assert len(key) == 16
-            >>> db_route = keygen.parse_route(key)
-            >>> print(db_route)
-            6
+            >>> db_route = user_keygen.parse_route(key)
             >>> assert db_route < shard_count
 
         """

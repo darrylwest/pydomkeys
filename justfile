@@ -38,10 +38,14 @@ mypy:
 refurb:
     poetry run refurb pydomkeys/ tests/
 
+doctest:
+    poetry run python -m doctest pydomkeys/*.py
+    echo "\033[32;1;4mdoctest ok\033[0m"
+
 docs:
     poetry run sphinx-multiversion docs ./docs/_build/html
 
 precommit:
     clear
-    just test cover format ruff refurb mypy
+    just test cover format ruff doctest refurb mypy
 
