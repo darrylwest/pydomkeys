@@ -26,6 +26,7 @@ max_count = 250_000
 
 @timer_decorator
 def test_txkey():
+    
     kset = set()
 
     keys = (keygen.txkey() for _ in range(max_count))
@@ -66,10 +67,15 @@ def test_route_key():
 def main(args: list) -> None:
     # print(f'{args}')
 
+    print(f'[yellow]Testing txkey with {max_count} rounds...')
     test_txkey()
-    test_route_key()
+    print(f"[green3]Ok")
 
-    # print(f"[green3]stress tests completed {max_count} rounds without error, time: {elapsed} seconds...")
+    print(f'[yellow]Testing route_key with {max_count} rounds...')
+    test_route_key()
+    print(f"[green3]Ok")
+
+    print(f"[green3]Stress tests completed {max_count} rounds without error...")
 
 
 if __name__ == "__main__":
