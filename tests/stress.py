@@ -12,21 +12,24 @@ keygen = KeyGen.create("T1", shard_count)
 
 # TODO(dpw): add thread pool workers with mpire
 
+
 def timer_decorator(func):
     def wrapper(*args, **kwargs):
         start_time = time.time_ns()
         result = func(*args, **kwargs)
         end_time = time.time_ns()
         elapsed = (end_time - start_time) / 1_000_000_000
-        print(f"{func.__name__} took {elapsed} seconds to run.")
+        name = func.__name__[5:]
+        print(f"[green3]{name} took {elapsed} seconds to run, Ok.")
         return result
+
     return wrapper
 
-max_count = 250_000
+
+
 
 @timer_decorator
-def test_txkey():
-    
+def test_txkey(max_count: int) -> bool:
     kset = set()
 
     keys = (keygen.txkey() for _ in range(max_count))
@@ -42,7 +45,7 @@ def test_txkey():
 
 
 @timer_decorator
-def test_route_key():
+def test_route_key(max_count: int) -> bool:
     kset = set()
     keys = (keygen.route_key() for _ in range(max_count))
 
@@ -61,21 +64,23 @@ def test_route_key():
         ), f"[red] ERROR! route key has a bad shard parse {shard}"
 
     return max_count == len(kset)
-    
 
 
 def main(args: list) -> None:
     # print(f'{args}')
 
-    print(f'[yellow]Testing txkey with {max_count} rounds...')
-    test_txkey()
-    print(f"[green3]Ok")
+    max_count = 500_000
+    loops = range(1,6)
 
-    print(f'[yellow]Testing route_key with {max_count} rounds...')
-    test_route_key()
-    print(f"[green3]Ok")
+    for loop in loops:
+        print(f"{loop}) [yellow]Testing txkey with {max_count} rounds: ", end="")
+        test_txkey(max_count)
+        # print(f"[green3]Ok")
 
-    print(f"[green3]Stress tests completed {max_count} rounds without error...")
+        print(f"{loop}) [yellow]Testing route_key with {max_count} rounds: ", end="")
+        test_route_key(max_count)
+
+    print(f"[green3]Stress tests completed without error...")
 
 
 if __name__ == "__main__":
