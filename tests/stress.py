@@ -5,10 +5,11 @@
 import sys
 from rich import print
 from pydomkeys.keys import KeyGen
+import time
 
 shard_count = 4
 keygen = KeyGen.create("T1", shard_count)
-max_count = 100_000
+max_count = 250_000
 
 # TODO(dpw): add thread pool workers with mpire
 
@@ -41,11 +42,14 @@ def test_route_key():
 
 def main(args: list) -> None:
     # print(f'{args}')
-    # start
+
+    t0 = time.time_ns()
     test_txkey()
     test_route_key()
+    t1 = time.time_ns()
+    elapsed = (t1 - t0) / 1_000_000_000
 
-    print("[green3]stress tests completed without error...")
+    print(f"[green3]stress tests completed {max_count} rounds without error, time: {elapsed} seconds...")
 
 
 if __name__ == "__main__":
