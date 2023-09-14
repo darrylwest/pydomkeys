@@ -6,6 +6,7 @@ import sys
 from rich import print
 from pydomkeys.keys import KeyGen
 import time
+import schedule
 
 shard_count = 4
 keygen = KeyGen.create("T1", shard_count)
@@ -64,11 +65,10 @@ def test_route_key(max_count: int) -> bool:
     return max_count == len(kset)
 
 
-def main(args: list) -> None:
+def run_loops(max_count: int = 500_000, loops: int = 8):
     # print(f'{args}')
 
-    max_count = 500_000
-    loops = range(1, 6)
+    loops = range(1, loops + 1)
 
     for loop in loops:
         print(f"{loop}) [yellow]Testing txkey with {max_count} rounds: ", end="")
@@ -79,6 +79,20 @@ def main(args: list) -> None:
         test_route_key(max_count)
 
     print(f"[green3]Stress tests completed without error...")
+
+def main(args: list) -> None:
+    if '--at' in args:
+        schedule.every().minute.at(':15').do(run_loops)
+        print("waiting for scheduled time...")
+        while True:
+            schedule.run_pending()
+            time.sleep(1)
+
+    else:
+        max_count = 500_000
+        loops = 5
+
+        run_loops(max_count, loops)
 
 
 if __name__ == "__main__":

@@ -1439,6 +1439,17 @@ files = [
 ]
 
 [[package]]
+name = "schedule"
+version = "1.2.0"
+description = "Job scheduling for humans."
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "schedule-1.2.0-py2.py3-none-any.whl", hash = "sha256:415908febaba0bc9a7c727a32efb407d646fe994367ef9157d123aabbe539ea8"},
+    {file = "schedule-1.2.0.tar.gz", hash = "sha256:b4ad697aafba7184c9eb6a1e2ebc41f781547242acde8ceae9a0a25b04c0922d"},
+]
+
+[[package]]
 name = "six"
 version = "1.16.0"
 description = "Python 2 and 3 compatibility utilities"
@@ -1781,4 +1792,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "deb3b9a73371c8cd0fae06ecc5f4600d78526960b45b6f4a46ebced0effbbe66"
+content-hash = "94b986d8f31bc95bd40c37b5755d113da11a1028ee8394e99e464e260b9b724b"
