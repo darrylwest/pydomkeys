@@ -80,9 +80,10 @@ def run_loops(max_count: int = 500_000, loops: int = 8):
 
     print(f"[green3]Stress tests completed without error...")
 
+
 def main(args: list) -> None:
-    if '--at' in args:
-        schedule.every().minute.at(':15').do(run_loops)
+    if "--at" in args:
+        schedule.every().minute.at(":15").do(run_loops)
         print("waiting for scheduled time...")
         while True:
             schedule.run_pending()
