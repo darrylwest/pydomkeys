@@ -65,7 +65,7 @@ def test_route_key(max_count: int) -> bool:
     return max_count == len(kset)
 
 
-def run_loops(max_count: int = 500_000, loops: int = 8):
+def run_loops(max_count: int = 500_000, loops: int = 12):
     # print(f'{args}')
 
     loops = range(1, loops + 1)
