@@ -7,6 +7,7 @@ from rich import print
 from pydomkeys.keys import KeyGen
 import time
 import schedule
+from functools import partial
 
 shard_count = 4
 keygen = KeyGen.create("T1", shard_count)
@@ -65,7 +66,8 @@ def test_route_key(max_count: int) -> bool:
     return max_count == len(kset)
 
 
-def run_loops(max_count: int = 500_000, loops: int = 12):
+@timer_decorator
+def run_loops(max_count: int = 500_000, loops: int = 5):
     # print(f'{args}')
 
     loops = range(1, loops + 1)
@@ -78,22 +80,22 @@ def run_loops(max_count: int = 500_000, loops: int = 12):
         print(f"{loop}) [yellow]Testing route_key with {max_count} rounds: ", end="")
         test_route_key(max_count)
 
-    print(f"[green3]Stress tests completed without error...")
+    print(f"[green3]Stress tests completed without error: ", end="")
 
 
 def main(args: list) -> None:
     if "--at" in args:
-        schedule.every().minute.at(":15").do(run_loops)
-        print("waiting for scheduled time...")
+        looper = partial(run_loops, max_count=500_000, loops=12)
+
+        schedule.every().minute.at(":15").do(looper)
+        print("waiting for scheduled time...", flush=True)
         while True:
             schedule.run_pending()
             time.sleep(1)
 
     else:
-        max_count = 500_000
-        loops = 5
-
-        run_loops(max_count, loops)
+        print("Running the default loops...")
+        run_loops()
 
 
 if __name__ == "__main__":
