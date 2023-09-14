@@ -26,8 +26,6 @@ def timer_decorator(func):
     return wrapper
 
 
-
-
 @timer_decorator
 def test_txkey(max_count: int) -> bool:
     kset = set()
@@ -70,7 +68,7 @@ def main(args: list) -> None:
     # print(f'{args}')
 
     max_count = 500_000
-    loops = range(1,6)
+    loops = range(1, 6)
 
     for loop in loops:
         print(f"{loop}) [yellow]Testing txkey with {max_count} rounds: ", end="")
