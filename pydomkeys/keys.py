@@ -31,6 +31,7 @@ from typing import Optional, Self
 from pydomkeys.base62 import Base62
 
 DEFAULT_ALPHABET = string.digits + string.ascii_uppercase + string.ascii_lowercase
+ROUTE_KEY_LENGTH = 16
 
 
 class Counter:
@@ -177,6 +178,12 @@ class KeyGen:
         route = self.domain_router.route()
 
         return f"{prefix}{route}{key}"
+
+    def is_valid_route_key(self, key: str) -> bool:
+        """Return true if the key is a valid route key."""
+        return len(key) == ROUTE_KEY_LENGTH and key.startswith(
+            self.domain_router.domain(),
+        )
 
     def parse_route(self, key: str) -> int:
         """Parse the route from the key and return the route number based on the number of shards.

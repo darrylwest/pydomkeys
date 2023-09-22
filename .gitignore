@@ -6,3 +6,4 @@ reflex.db
 perf8-report
 dist
 out
+*.swp

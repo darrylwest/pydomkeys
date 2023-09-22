@@ -50,6 +50,19 @@ def test_txkey():
         console.log(f"{n} {key=}")
 
 
+def test_is_valid_route_key():
+    """Test if the route key is valid"""
+    router = DomainRouter("T0", 4)
+    keygen = KeyGen(domain_router=router)
+    key = keygen.route_key()
+    assert keygen.is_valid_route_key(key)
+    # correct route, bad length
+    assert not keygen.is_valid_route_key(key[0:10])
+    key = "badkeyrout123467"
+    # correct length, bad rout
+    assert not keygen.is_valid_route_key(key)
+
+
 def test_counter():
     """Test the counter."""
     console.rule("Default counter for large and small numbers")
