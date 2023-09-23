@@ -181,8 +181,12 @@ class KeyGen:
 
     def is_valid_route_key(self, key: str) -> bool:
         """Return true if the key is a valid route key."""
-        return len(key) == ROUTE_KEY_LENGTH and key.startswith(
-            self.domain_router.domain(),
+        return (
+            isinstance(key, str)
+            and len(key) == ROUTE_KEY_LENGTH
+            and key.startswith(
+                self.domain_router.domain(),
+            )
         )
 
     def parse_route(self, key: str) -> int:

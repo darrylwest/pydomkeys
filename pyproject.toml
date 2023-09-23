@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pydomkeys"
-version = "0.3.6"
+version = "0.3.7"
 description = "A python library for domain-entity key generation identifiers e.g., user, provider, inventory item, etc."
 authors = ["darryl west <dpw@raincitysoftware.com>"]
 readme = "README.md"

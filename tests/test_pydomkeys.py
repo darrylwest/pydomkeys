@@ -61,6 +61,8 @@ def test_is_valid_route_key():
     key = "badkeyrout123467"
     # correct length, bad rout
     assert not keygen.is_valid_route_key(key)
+    # send in a non-string
+    assert not keygen.is_valid_route_key(False)
 
 
 def test_counter():

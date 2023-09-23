@@ -48,6 +48,10 @@ refurb:
 stress:
     poetry run ./tests/stress.py
 
+# launch bpython and start with .repl-start.py script
+repl:
+    poetry run bpython -i .repl-start.py
+
 # run the doc tests
 doctest:
     poetry run python -m doctest pydomkeys/*.py
