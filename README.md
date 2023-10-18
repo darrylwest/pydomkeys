@@ -130,4 +130,4 @@ Except where noted (below and/or in individual files), all code in this reposito
 * MIT License ([LICENSE-MIT](LICENSE-MIT) or [http://opensource.org/licenses/MIT](http://opensource.org/licenses/MIT))
 * Apache License, Version 2.0 ([LICENSE-APACHE](LICENSE-APACHE) or [http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0))
 
-###### PyDomKeys | 2023.09.08
+###### PyDomKeys | 2023.10.18
