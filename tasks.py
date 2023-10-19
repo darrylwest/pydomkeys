@@ -53,6 +53,10 @@ def doctest(ctx):
 def docs(ctx):
     ctx.run('poetry run sphinx-multiversion docs ./docs/_build/html', pty=True)
 
+@task
+def repl(ctx):
+    ctx.run('poetry run bpython -i .repl-start.py', pty=True)
+
 @task(aliases=['precommit'])
 def pre(ctx):
     ctx.run('clear', pty=True)
